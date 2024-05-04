@@ -16,7 +16,7 @@ pipeline{
         stage('Initializing Terraform'){
             steps {
                 script {
-                    dir('Project-7/tf-aws-eks'){
+                    dir('tf-aws-eks'){
                         sh 'terraform init'
                     }
                 }
@@ -25,7 +25,7 @@ pipeline{
         stage('Validating Terraform'){
             steps {
                 script {
-                    dir('Project-7/tf-aws-eks'){
+                    dir('tf-aws-eks'){
                         sh 'terraform validate'
                     }
                 }
@@ -34,8 +34,18 @@ pipeline{
         stage('Terraform Plan'){
             steps {
                 script {
-                    dir('Project-7/tf-aws-eks'){
+                    dir('tf-aws-eks'){
                         sh 'terraform plan -var-file=variables/dev.tfvars'
+                    }
+                    input(message: "Are you sure to proceed?", ok: "Proceed")
+                }
+            }
+        }
+        stage('Creating/Destroying EKS Cluster'){
+            steps {
+                script {
+                    dir('tf-aws-eks'){
+                        sh 'terraform $action -var-file=variables/dev.tfvars -auto-approve' 
                     }
                 }
             }
