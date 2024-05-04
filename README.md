@@ -3,3 +3,6 @@ Repository for running terraform eks cicd pipeline via jenkins server (EC2 insta
 
 This repo is part of the AWS DevOps Project -
 https://github.com/vishal2505/AWSDevOpsProjects/tree/main/Project-7
+
+
+![](https://github.com/vishal2505/terraform-eks-cicd.git/architecture/eks_cluster.gif)
